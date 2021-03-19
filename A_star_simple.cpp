@@ -41,9 +41,9 @@ void print(pair<int,int> p, const vector<vector<cell>> &cells, pair<int,int> src
     if(p != src){
         print(cells[p.first][p.second].parent, cells, src, len, br);
     }
-    cout << " --> (" << p.first <<','<< p.second << ") ";
+    cout << " --> (" << p.first+1 <<','<< p.second+1 << ") ";
     Rectangle tmp(p.first*len + len/2, p.second*br+ br/2,len,br);
-    tmp.setColor(COLOR(105, 216, 245));
+    tmp.setColor(COLOR(0, 226, 255));
     tmp.setFill(true);
     tmp.imprint();
 
@@ -71,7 +71,7 @@ void astar(const vector<vector<bool>>& input, pair<int,int>src, pair<int,int> de
                     if(neighbour != dest){
                         if(!closedlist[neighbour.first][neighbour.second]){
                             int g = cells[i][j].g + 1,
-                            h = abs(neighbour.first - dest.first + neighbour.second - dest.second); //manhattan distance
+                            h = max(abs(neighbour.first - dest.first) , abs(neighbour.second - dest.second)); //diagonal distance
                             int f = g+h;
                             if(neighbrcell.f == -1 || neighbrcell.f>f){
                                 openlist.emplace(f, neighbour.first, neighbour.second);
@@ -103,14 +103,18 @@ void astar(const vector<vector<bool>>& input, pair<int,int>src, pair<int,int> de
 int main()
 {
     int n,m;
+    cout << "All numbers should be Whitespace separated."<< endl <<
+     "All pairs are in the format: <ROW> <COLUMN> (1-indexed)" << endl;
+    cout << "Enter the dimensions of the map:" << endl;
     cin >> n >> m;
-    vector<vector<bool>> input(n);     //obsctacles are 1
-    vector<bool> row (m,0);
-    for (int i = 0; i < n; i++)
-    {
-        input[i] = row;
-    }
-    initCanvas("A*", WINDOW_X, WINDOW_Y);
+    cout << "Select all obstacles by clicking and unselect by clicking again." << endl
+    <<"Press any key after selection."<< endl
+    << "Then click on the initial/source cell, followed by the destination/final cell" <<endl
+    << "The algorithm shows one of the shortest route if there is any."<<endl << endl;
+    system("pause");
+
+    vector<vector<bool>> input(n, vector<bool> (m,0));     //obsctacles are 1
+    initCanvas("A* Diagonal", WINDOW_X, WINDOW_Y);
     double len,br;
     len = WINDOW_X/m;
     br = WINDOW_Y/n;
@@ -129,12 +133,13 @@ int main()
             l1.imprint();l2.imprint();
         }
     }*/
+    cout << "Obstacles: "<< endl;
     while(true){
         XEvent event;
         nextEvent(event);
         if(mouseButtonPressEvent(event)){
             x = event.xbutton.x; y = event.xbutton.y;
-            i = int(x/len); j = int((y)/br);cout<<" i:"<<i<<" j:"<<j;
+            i = int(x/len); j = int((y)/br);cout<<" ("<<i+1<<','<<j+1<<") ";
             if(input[i][j]){
             input[i][j] = 0;
             Rectangle tmp(i*len + len/2, j*br+ br/2,len,br);
@@ -156,28 +161,29 @@ int main()
         break;
         }
     }
+    cout<<endl;
 
     pair <int,int> src, dest;
     while(true){
-    XEvent event;
-    nextEvent(event);
-    if(mouseButtonPressEvent(event)){
-        x = event.xbutton.x; y = event.xbutton.y;
-        i = int(x/len); j = int((y)/br);cout<<endl<<"src i:"<<i<<" j:"<<j;
-        src = make_pair(i, j);
-        break;
-    }
+        XEvent event;
+        nextEvent(event);
+        if(mouseButtonPressEvent(event)){
+            x = event.xbutton.x; y = event.xbutton.y;
+            i = int(x/len); j = int((y)/br);cout<<"src: ("<<i+1<<','<<j+1<<") "<<endl;
+            src = make_pair(i, j);
+            break;
+        }
     }
 
     while(true){
-    XEvent event;
-    nextEvent(event);
-    if(mouseButtonPressEvent(event)){
-        x = event.xbutton.x; y = event.xbutton.y;
-        i = int(x/len); j = int((y)/br);cout<<endl<<"dest i:"<<i<<" j:"<<j<<endl;
-        dest = make_pair(i, j);
-        break;
-    }
+        XEvent event;
+        nextEvent(event);
+        if(mouseButtonPressEvent(event)){
+            x = event.xbutton.x; y = event.xbutton.y;
+            i = int(x/len); j = int((y)/br);cout<<"dest ("<<i+1<<','<<j+1<<") "<<endl;
+            dest = make_pair(i, j);
+            break;
+        }
     }
     astar(input, src, dest, n, m, len, br);
     getClick();
