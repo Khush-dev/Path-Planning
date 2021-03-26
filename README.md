@@ -9,6 +9,7 @@ Two different heuristics depending upon the allowed direction of motion are show
 RRT and RRT* Algorithm is currently under testing phase.
 Almost complete, UI needs attention.
 
-Next: PRM Algorithm
+Next: PRM Algorithm.
+
 Drive link to photos showing the RRT code being run:
 https://drive.google.com/drive/folders/1VdjxsMA3oLdE0wyWlr04yuKCpgBXREJY?usp=sharing
