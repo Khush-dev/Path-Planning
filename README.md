@@ -11,5 +11,5 @@ Almost complete, UI needs attention.
 
 Next: PRM Algorithm.
 
-Drive link to photos showing the RRT code being run:
+Drive link to photos showing the codes being run:
 https://drive.google.com/drive/folders/1VdjxsMA3oLdE0wyWlr04yuKCpgBXREJY?usp=sharing
