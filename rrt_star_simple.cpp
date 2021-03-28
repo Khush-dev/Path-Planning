@@ -131,7 +131,7 @@ void rrt(vector<vector<bool>>& input, pair<int,int> src, pair<int,int> dest, int
               cost[i][j] = d + cost[n.first][n.second];
             }
         }
-        imprintLine(i*len + len/2, j*br+len/2, parent[i][j].first*len + len/2, parent[i][j].second*br + br/2);
+        imprintLine(i*len + len/2, j*br+br/2, parent[i][j].first*len + len/2, parent[i][j].second*br + br/2);
 
         for(auto n:neighbours){
           d = dist(n, node, len, br);             //reusing variable d
