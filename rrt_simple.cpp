@@ -128,7 +128,7 @@ void rrt(vector<vector<bool>>& input, pair<int,int> src, pair<int,int> dest, int
             //cout << " dist between ("<< n.first+1 <<',' << n.second+1<< ") & (" << node.first+1 <<',' << node.second+1<< ")  :" << d << endl;;
         }
         if(closedlist[i][j]){
-            imprintLine(i*len + len/2, j*br+len/2, parent[i][j].first*len + len/2, parent[i][j].second*br + br/2);
+            imprintLine(i*len + len/2, j*br+br/2, parent[i][j].first*len + len/2, parent[i][j].second*br + br/2);
             nodes.push_back(node);
             counter++;
             //cout << " (" << node.first+1 <<',' << node.second+1 << ") ";
