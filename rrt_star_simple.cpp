@@ -167,7 +167,7 @@ void rrt(vector<vector<bool>>& input, pair<int,int> src, pair<int,int> dest, int
     if(c=='y'){
         for(auto n:nodes){
             if(n == src) continue;cout << "Showing nodes"<<endl;
-            imprintLine(n.first*len + len/2, n.second*br+len/2, parent[n.first][n.second].first*len + len/2, parent[n.first][n.second].second*br + br/2);
+            imprintLine(n.first*len + len/2, n.second*br+br/2, parent[n.first][n.second].first*len + len/2, parent[n.first][n.second].second*br + br/2);
         }
     }
 
