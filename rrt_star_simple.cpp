@@ -138,7 +138,7 @@ void rrt(vector<vector<bool>>& input, pair<int,int> src, pair<int,int> dest, int
           if(cost[i][j] + d < cost[n.first][n.second]){
             parent[n.first][n.second] = node;
             cost[n.first][n.second] = cost[i][j] + d;
-            imprintLine(i*len + len/2, j*br+len/2, n.first*len + len/2, n.second*br + br/2);
+            imprintLine(i*len + len/2, j*br+br/2, n.first*len + len/2, n.second*br + br/2);
           }
         }
         nodes.push_back(node);
@@ -166,7 +166,7 @@ void rrt(vector<vector<bool>>& input, pair<int,int> src, pair<int,int> dest, int
     char c;cin >> c;
     if(c=='y'){
         for(auto n:nodes){
-            if(n == src) continue;cout << "Showing nodes"<<endl;
+            if(n == src) continue;
             imprintLine(n.first*len + len/2, n.second*br+br/2, parent[n.first][n.second].first*len + len/2, parent[n.first][n.second].second*br + br/2);
         }
     }
